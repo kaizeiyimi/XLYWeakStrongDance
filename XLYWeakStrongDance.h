@@ -29,21 +29,21 @@
 #define XLYMakeWeak(arg) \
 _Pragma("clang diagnostic push") \
 _Pragma("clang diagnostic ignored \"-Wshadow\"") \
-__weak typeof(arg) arg##_weak_ = arg; \
+__weak __typeof(arg) arg##_weak_ = arg; \
 _Pragma("clang diagnostic pop")
 
 ///create a strong variable based on the XLYMakeWeak macro. the new variable uses the same name as arg.
 #define XLYMakeStrong(arg) \
 _Pragma("clang diagnostic push") \
 _Pragma("clang diagnostic ignored \"-Wshadow\"") \
-__strong typeof(arg##_weak_) arg = arg##_weak_ \
+__strong __typeof(arg##_weak_) arg = arg##_weak_ \
 _Pragma("clang diagnostic pop")
 
 ///create a strong variable based on the XLYMakeWeak macro. the new variable uses the var as name.
 #define XLYMakeStrongWithVariable(arg, var) \
 _Pragma("clang diagnostic push") \
 _Pragma("clang diagnostic ignored \"-Wshadow\"") \
-__strong typeof(arg##_weak_) var = arg##_weak_ \
+__strong __typeof(arg##_weak_) var = arg##_weak_ \
 _Pragma("clang diagnostic pop")
 
 ///helper macro. add a return statement if the strong arg is nil.
